@@ -207,6 +207,12 @@ class XLearn(object):
         _check_call(_LIB.XLearnSetBool(ctypes.byref(self.handle),
                                        c_str(key), ctypes.c_bool(False)))
 
+    def enableWeights(self):
+        """Enable weights"""
+        key = 'is_weighted'
+        _check_call(_LIB.XLearnSetBool(ctypes.byref(self.handle),
+                                       c_str(key), ctypes.c_bool(True)))
+
     def disableLockFree(self):
         """Disable lock free training"""
         key = 'lock_free'

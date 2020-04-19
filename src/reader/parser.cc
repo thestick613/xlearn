@@ -65,8 +65,8 @@ uint64 Parser::get_line_from_buffer(char* line,
 
 //------------------------------------------------------------------------------
 // LibsvmParser parses the following data format:
-// [y1 idx:value idx:value ...]
-// [y2 idx:value idx:value ...]
+// [y1 weight idx:value idx:value ...]
+// [y2 weight idx:value idx:value ...]
 // idx can start from 0
 //------------------------------------------------------------------------------
 void LibsvmParser::Parse(char* buf, 
@@ -133,8 +133,8 @@ void LibsvmParser::Parse(char* buf,
 
 //------------------------------------------------------------------------------
 // FFMParser parses the following data format:
-// [y1 field:idx:value field:idx:value ...]
-// [y2 field:idx:value field:idx:value ...]
+// [y1 weight field:idx:value field:idx:value ...]
+// [y2 weight field:idx:value field:idx:value ...]
 // idx can start from 0
 //------------------------------------------------------------------------------
 void FFMParser::Parse(char* buf, 
@@ -159,6 +159,8 @@ void FFMParser::Parse(char* buf,
     if (has_label_) {  // for training task
       char *y_char = strtok(line_buf, splitor_.c_str());
       matrix.Y[i] = atof(y_char);
+      char *w_char = strtok(nullptr, splitor_.c_str());
+      matrix.WGTH[i] = atof(w_char);
     } else {  // for predict task
       matrix.Y[i] = -2;
     }
